@@ -47,9 +47,8 @@ def Dijkstra(a_G, a_s, a_d = None):
                 if currd < D[n][1]:
                     # re-assign shortest distance
                     D[n][1] = currd
-                    # shortest path to this vertex is shortest path to current
-                    # vertex + the current vertex
-                    D[n][0] = D[curr][0] + [curr]
+                    # shortest path to this vertex is through current vertex
+                    D[n][0] = D[curr][0][:]
                 # endif #
             # endif #
         # endfor #
@@ -59,7 +58,6 @@ def Dijkstra(a_G, a_s, a_d = None):
     return D
 # enddef Dijkstra() #
 if __name__ == "__main__":
-    #sub = {'SF':{'Boston':110},'NY':{'LA':96},'Seattle':{'Jacksonville':94},'LA':{'Chicago':67},'Phoenix':{'Jacksonville':65,'Seattle':37},'Medford':{'Minneapolis':63,'Omaha':57},'Great Falls':{'Minneapolis':39,'Omaha'}}
     sub = dict()
     for city in ['San Francisco','Seattle','Medford','Los Angeles',
             'Great Falls','Salt Lake City','Phoenix','Denver','Albuquerque',
