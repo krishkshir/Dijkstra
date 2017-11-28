@@ -53,6 +53,8 @@ def Dijkstra(a_G, a_s, a_d = None):
                 # endif #
             # endif #
         # endfor #
+        # Add current node to its path
+        D[curr][0].append(curr)
         # Remove current node from unvisited ones
         unvisited.remove(curr)
     # endwhile #
