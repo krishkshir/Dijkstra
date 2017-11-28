@@ -19,8 +19,6 @@ def Dijkstra(a_G, a_s, a_d = None):
     """
     # extract vertices from a_G and mark them all as unvisited
     unvisited = a_G.keys()
-    # total number of vertices
-    N = len(unvisited)
     # Initialize dictionary of shortest distances
     D = dict()
     for v in unvisited:
@@ -32,9 +30,11 @@ def Dijkstra(a_G, a_s, a_d = None):
     while len(unvisited) > 0:
         # Select current node as min. of shortest distances so far computed
         minD, curr = min([(D[n][1],n) for n in unvisited])
+        # Add current node to its path
+        D[curr][0].append(curr)
         # We're at the destination already
         if curr == a_d:
-            break
+            return a_d, D[a_d]
         # endif #
         # Loop over all neighboring vertices
         for n, d in a_G[curr].items():
@@ -53,8 +53,6 @@ def Dijkstra(a_G, a_s, a_d = None):
                 # endif #
             # endif #
         # endfor #
-        # Add current node to its path
-        D[curr][0].append(curr)
         # Remove current node from unvisited ones
         unvisited.remove(curr)
     # endwhile #
@@ -163,6 +161,7 @@ if __name__ == "__main__":
     print sub
     # Perform Dijkstra's algorithm
     D = Dijkstra(sub,'San Francisco')
-    print "Shortest paths and minimum distances from San Francisco:-"
+    #D = Dijkstra(sub,'San Francisco','Chicago')
+    print "Shortest paths and minimum distances from San Francisco to:-"
     print D
 # endif #
